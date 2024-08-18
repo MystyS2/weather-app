@@ -25,6 +25,7 @@ function App() {
   const [city, setCity] = useState("");
   const cities = ["Seoul", "New York", "Osaka", "Paris"];
   const [btnActive, setBtnActive] = useState("");
+  const [apiError, setAPIError] = useState("");
 
   // 현재 위치 좌표 가져와서 날씨 정보 api 호출
   const getCurrentLocation = () => {
@@ -47,21 +48,28 @@ function App() {
       setBtnActive("");
       setLoading(false); // 로딩 종료
     } catch(error){
-      throw error;
+      setAPIError(error.message);
+      setLoading(false);
     }
 
   };
 
   // 도시 이름으로 날씨 정보 가져오는 함수
   const getWeatherByCityName = async (city) => {
-    setLoading(true); // 로딩 시작
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.WEATHER_API_KEY1}&units=metric`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-    setCity(city);
-    setBtnActive('city');
-    setLoading(false); // 로딩 종료
+    try{
+      setLoading(true); // 로딩 시작
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.WEATHER_API_KEY1}&units=metric`;
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setCity(city);
+      setBtnActive('city');
+      setLoading(false); // 로딩 종료
+    } catch(error){
+      setAPIError(error.message);
+      setLoading(false); 
+    }
+
   };
 
   useEffect(() => {
