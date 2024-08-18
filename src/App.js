@@ -101,7 +101,7 @@ function App() {
         <div className="background">{changeBackground()}</div>
         <div className="info-container">
           {loading ? ( // 로딩 스피너 표시
-            <div className="spinner">Loading...</div>
+            <img src='https://64.media.tumblr.com/767288fc52dd8bf80733d1f198be50e4/1c91bcd9bd19a2b2-02/s500x750/b92fcb5ba884cf99e364b422db37977ba1ad7288.gifv' alt="로딩중" width="10%" />
           ) : (
             <WeatherBox weather={weather} />
           )}
