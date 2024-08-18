@@ -10,24 +10,6 @@ const CloudsBackground = () => {
           </div>
         </div>
       </div>
-
-      <div id="footer">
-        <div className="wrapper">
-          <a href="https://andreasvirkus.github.io">
-            <div className="logo">
-              <div className="element logo-text pre-test" id="sdew_1">
-                <p>a</p>
-              </div>
-              <div className="element logo-text pre-test selected" id="sdew_2">
-                <p>J</p>
-              </div>
-              <div className="element logo-text pre-test" id="sdew_3">
-                <p>v</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
   );
 };
