@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 
 const WeatherButton = ({
+  btnState,
   cities,
   getWeatherByCityName,
   getCurrentLocation,
@@ -9,12 +10,12 @@ const WeatherButton = ({
   // props로 api 호출 함수 받아옴
   return (
     <div>
-      <Button color="primary" onClick={getCurrentLocation}>
+      <Button variant={btnState==""?"bordered":"solid"} color="primary" onClick={getCurrentLocation}>
         My Location
       </Button>
       <Dropdown>
         <DropdownTrigger>
-          <Button color="danger">Other Cities</Button>
+          <Button variant={btnState=="city"?"bordered":"solid"} color="danger">Other Cities</Button>
         </DropdownTrigger>
         <DropdownMenu
           aria-label="Action event "

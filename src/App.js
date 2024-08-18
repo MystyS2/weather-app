@@ -17,16 +17,14 @@ import CloudsBackground from "./component/CloudsBackground";
 // api key
 import config from "./apikey.js";
 
-// 1. 앱이 실행되자마자 현재 위치 기반 날씨 정보 출력
-// 2. 제공 정보 : 화씨, 섭씨, 도시, 날씨 상태
-// 3. 버튼 5개(현재위치 + 다른 도시 4개)
-// 4. 도시 버튼을 누르면 도시별 날씨 확인 가능
-// 5. 로딩 스피너
+
 function App() {
   // states
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true); // 로딩 상태
+  const [city, setCity] = useState("");
   const cities = ["Seoul", "New York", "Osaka", "Paris"];
+  const [btnActive, setBtnActive] = useState("");
 
   // 현재 위치 좌표 가져와서 날씨 정보 api 호출
   const getCurrentLocation = () => {
@@ -44,6 +42,8 @@ function App() {
     let response = await fetch(url);
     let data = await response.json();
     setWeather(data);
+    setCity("");
+    setBtnActive("");
     setLoading(false); // 로딩 종료
   };
 
@@ -54,6 +54,8 @@ function App() {
     let response = await fetch(url);
     let data = await response.json();
     setWeather(data);
+    setCity(city);
+    setBtnActive('city');
     setLoading(false); // 로딩 종료
   };
 
@@ -91,6 +93,7 @@ function App() {
             <WeatherBox weather={weather} />
           )}
           <WeatherButton
+            btnState={btnActive}
             cities={cities}
             getWeatherByCityName={getWeatherByCityName} // 도시 이름으로 날씨 가져오는 함수 전달
             getCurrentLocation={getCurrentLocation} // 현재 위치 기반 날씨 함수 전달
