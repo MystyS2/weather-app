@@ -4,7 +4,12 @@ body{
   background-size: cover;
 }
 
-.container{
+.view{
+  height: 100vh;
+  width: 100vw;
+}
+
+.info-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,12 +43,13 @@ body{
   font-size: 48px;
 }
 
-.container Button{
+.info-container Button{
   margin: 10px;
 }
 
 
-.inforBox img, .infoBox h3{
+.infoBox img, .infoBox h3{
+  font-size: 32px;
   display: inline-block;
   margin: 0;
   vertical-align: middle;

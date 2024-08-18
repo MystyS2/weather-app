@@ -1,10 +1,11 @@
 // css 파일
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./component/RainBackground.css";
 import "./component/SunBackground.css";
 import "./component/SnowBackground.css";
 import "./component/CloudsBackground.scss";
+// nextui
+import { NextUIProvider } from "@nextui-org/react";
 // 리액트, 컴포넌트
 import { useEffect, useState } from "react";
 import WeatherBox from "./component/WeatherBox";
@@ -14,7 +15,7 @@ import RainBackground from "./component/RainBackground";
 import SnowBackground from "./component/SnowBackground";
 import CloudsBackground from "./component/CloudsBackground";
 // api key
-import config from "./apikey.js"
+import config from "./apikey.js";
 
 // 1. 앱이 실행되자마자 현재 위치 기반 날씨 정보 출력
 // 2. 제공 정보 : 화씨, 섭씨, 도시, 날씨 상태
@@ -25,6 +26,7 @@ function App() {
   // states
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true); // 로딩 상태
+  const cities = ["Seoul", "New York", "Osaka", "Paris"];
 
   // 현재 위치 좌표 가져와서 날씨 정보 api 호출
   const getCurrentLocation = () => {
@@ -79,20 +81,23 @@ function App() {
   };
 
   return (
-    <div>
-      <div className="background">{changeBackground()}</div>
-      <div className="container">
-        {loading ? ( // 로딩 스피너 표시
-          <div className="spinner">Loading...</div>
-        ) : (
-          <WeatherBox weather={weather} />
-        )}
-        <WeatherButton
-          getWeatherByCityName={getWeatherByCityName} // 도시 이름으로 날씨 가져오는 함수 전달
-          getCurrentLocation={getCurrentLocation} // 현재 위치 기반 날씨 함수 전달
-        />
+    <NextUIProvider>
+      <div className="view">
+        <div className="background">{changeBackground()}</div>
+        <div className="info-container">
+          {loading ? ( // 로딩 스피너 표시
+            <div className="spinner">Loading...</div>
+          ) : (
+            <WeatherBox weather={weather} />
+          )}
+          <WeatherButton
+            cities={cities}
+            getWeatherByCityName={getWeatherByCityName} // 도시 이름으로 날씨 가져오는 함수 전달
+            getCurrentLocation={getCurrentLocation} // 현재 위치 기반 날씨 함수 전달
+          />
+        </div>
       </div>
-    </div>
+    </NextUIProvider>
   );
 }
 
