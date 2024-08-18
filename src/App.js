@@ -37,14 +37,19 @@ function App() {
 
   // 날씨 정보 가져와서 state에 저장
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    setLoading(true); // 로딩 시작
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${config.WEATHER_API_KEY1}&units=metric`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-    setCity("");
-    setBtnActive("");
-    setLoading(false); // 로딩 종료
+    try{
+      setLoading(true); // 로딩 시작
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${config.WEATHER_API_KEY1}&units=metric`;
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setCity("");
+      setBtnActive("");
+      setLoading(false); // 로딩 종료
+    } catch(error){
+      throw error;
+    }
+
   };
 
   // 도시 이름으로 날씨 정보 가져오는 함수
